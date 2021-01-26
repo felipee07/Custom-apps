@@ -47,6 +47,14 @@ class TheHive(AppBase):
         )
         return response.text
 
+    async def search_query(self, apikey, url, custom_query):
+        self.thehive = TheHiveApi(url, apikey)
+
+        response = self.thehive.find_cases(
+            query=String(custom_query), range="all", sort=[]
+        )
+        return response.text
+
     async def add_observable(self, apikey, url, case_id, data, datatype, tags):
         self.thehive = TheHiveApi(url, apikey)
 
