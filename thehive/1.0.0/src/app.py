@@ -51,7 +51,7 @@ class TheHive(AppBase):
         self.thehive = TheHiveApi(url, apikey)
 
         response = self.thehive.find_cases(
-            query=String(custom_query), range="all", sort=[]
+            query=custom_query, range="all", sort=[]
         )
 
         if response.status_code == 200:

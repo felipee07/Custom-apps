@@ -264,7 +264,7 @@ actions:
     parameters:
       - name: custom_query 
         description: Custom query for search
-        example: title:misp AND tlp:2 
+        example: "{'_field': {title: shuffle}}" 
         required: true
         schema:
           type: string
