@@ -53,7 +53,11 @@ class TheHive(AppBase):
         response = self.thehive.find_cases(
             query=String(custom_query), range="all", sort=[]
         )
-        return response.text
+
+        if response.status_code == 200:
+            return response.text
+        else:
+            raise IOError(response.text)           
 
     async def add_observable(self, apikey, url, case_id, data, datatype, tags):
         self.thehive = TheHiveApi(url, apikey)
