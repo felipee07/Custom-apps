@@ -50,8 +50,13 @@ class TheHive(AppBase):
     async def search_query(self, apikey, url, custom_query):
         self.thehive = TheHiveApi(url, apikey)
 
+        try:
+            query = json.loads(custom_query)
+        except:
+            raise IOError("Invalid JSON payload received.")
+
         response = self.thehive.find_cases(
-            query=custom_query, range="all", sort=[]
+            query=query, range="all", sort=[]
         )
 
         if response.status_code == 200:
