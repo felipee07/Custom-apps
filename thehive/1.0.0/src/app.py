@@ -97,7 +97,7 @@ class TheHive(AppBase):
             search_range = "0-25"
 
         response = self.thehive.find_alerts(
-            query=String("title:'%s'" % title_query), range=search_range, sort=[]
+            query=ContainsString("title", title_query), range=search_range, sort=[]
         )
         return response.text
 
