@@ -262,12 +262,8 @@ actions:
   - name: search_query_dropdown
     description: custom search Query
     parameters:
-      - name: title_query
-        description: Custom query for search
+              - name: title_query2
         enum: ['on', off, running, error]
-        required: true
-        schema:
-          type: string
   - name: search_query
     description: custom search Query
     parameters:
