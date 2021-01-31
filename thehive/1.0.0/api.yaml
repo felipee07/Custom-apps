@@ -253,7 +253,7 @@ actions:
   - name: search_cases 
     description: Get an item from TheHive
     parameters:
-      - name: title_query 
+      - name: title_query2 
         description: The title to search for
         example: "injection"
         required: true
@@ -262,8 +262,10 @@ actions:
   - name: search_query_dropdown
     description: custom search Query
     parameters:
-        - name: title_query2
+      - name: title_query
+        description: Custom query for search
         enum: ['on', off, running, error]
+        required: true
   - name: search_query
     description: custom search Query
     parameters:
