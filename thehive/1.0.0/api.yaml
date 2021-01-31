@@ -264,7 +264,11 @@ actions:
     parameters:
       - name: title_query
         description: Custom query for search
-        enum: ['on', off, running, error]
+        options:
+            - poll_10min
+            - poll_23hours
+        schema:
+            type: string
         required: true
   - name: search_query
     description: custom search Query
