@@ -264,13 +264,13 @@ actions:
     parameters:
       - name: title_query
       description: The selected python function to run
-        required: true
-        multiline: true
-        example: '1'
-        options:
+      required: true
+      multiline: true
+      example: '1'
+      options:
           - poll_10min
           - poll_23hours
-        schema:
+      schema:
           type: string
   - name: search_query
     description: custom search Query
