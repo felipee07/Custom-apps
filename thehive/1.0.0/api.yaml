@@ -269,7 +269,7 @@ actions:
           - alert
         required: true
         schema:
-          type: string    
+          type: string
       - name: custom_query 
         description: Custom query for search
         example: "{\"_field\": \"title\", \"_value\": \"shuffle\"}" 
