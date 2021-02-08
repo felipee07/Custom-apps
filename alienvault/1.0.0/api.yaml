@@ -1,0 +1,111 @@
+walkoff_version: 1.0.0
+app_version: 1.0.0
+name: alienvault
+description: Alienvault SIEM for Shuffle
+tags:
+  - SIEM
+  - Search
+categories:
+  - SIEM
+  - Search
+contact_info:
+  name: "@felipee07"
+  url: https://github.com/felipee07
+authentication:
+  required: true
+  parameters:
+    - name: url
+      description: The URL to use
+      example: "my-instance.alienvault.cloud"
+      required: true
+      schema:
+        type: string
+    - name: apiuser
+      description: The Apikey to use
+      example: "shuffle"
+      required: true
+      schema:
+        type: string
+    - name: apikey
+      description: The Apikey to use
+      example: "*****"
+      required: true
+      schema:
+        type: string
+actions:
+  - name: get_alarms
+    description: Get alarm from the Alienvault API.
+    parameters:
+      - name: params
+        description: Pull alarms from the AlienVault API.
+        example: "page=1&size=50&sort=timestamp_occured,asc&status=open&suppressed=true&rule_intent=Environmental Awareness&rule_method=AWS EC2 Security Group Modified&rule_strategy=Network Access Control Modification&priority_label=medium&alarm_sensor_sources=308ba880-2518-44bb-9ada-07b158d11713&timestamp_occured_gte=1517933139670&timestamp_occured_lte=1517933149670"
+        required: true
+        schema:
+          type: string
+  - name: get_alarmid
+    description: Pull a specific alarm from the AlienVault API.
+    parameters:
+      - name: alarm_id
+        description: UUID of the alarm.
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+  - name: get_label
+    description: Get label.
+    parameters:
+      - name: alarm_id
+        description: UUID of the alarm.
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+  - name: put_label
+    description: Put labels on an alarm using the AlienVault API.
+    parameters:
+      - name: alarm_id
+        description: Alarm UUID
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+      - name: label_id
+        description: label UUID
+        example: ""
+        required: true
+        schema:
+          type: string
+  - name: delete_label
+    description: Delete labels from an alarm using the AlienVault API.
+    parameters:
+      - name: alarm_id
+        description: Alarm UUID
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+      - name: label_id
+        description: label UUID
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+  - name: get_events
+    description: Get events from the Alienvault API.
+    parameters:
+      - name: params
+        description: params to filter the alarms.
+        example: "page=1&size=50&sort=timestamp_occured,asc&status=open&suppressed=true&rule_intent=Environmental Awareness&rule_method=AWS EC2 Security Group Modified&rule_strategy=Network Access Control Modification&priority_label=medium&alarm_sensor_sources=308ba880-2518-44bb-9ada-07b158d11713&timestamp_occured_gte=1517933139670&timestamp_occured_lte=1517933149670"
+        required: true
+        schema:
+          type: string
+  - name: get_eventid
+    description: Pull a specific event from the AlienVault API.
+    parameters:
+      - name: eventid
+        description: UUID of the event.
+        example: "ab5a6cd9-7b59-d113-d2d1-3348bf510e6b"
+        required: true
+        schema:
+          type: string
+large_image: data:image/jpeg;base64,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

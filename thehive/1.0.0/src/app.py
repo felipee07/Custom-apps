@@ -269,52 +269,12 @@ class TheHive(AppBase):
 
     # Not sure what the data should be
     async def update_field(self, apikey, url, field_type, cur_id, field, data):
-        # This is kinda silly but..
-        if field_type.lower() == "alert":
-            newdata = {}
+        headers = {'Authorization': f'Bearer {apikey}', 'Content-Type': 'application/json'}
+        post_data = {"customFields.alienvaultID.string": "hi"}
+        r = requests.patch(f"{url}/api/{field_type}/{cur_id}", headers=headers, data=data)
 
-            if data.startswith("%s"):
-                ticket = self.thehive.get_alert(cur_id)
-                if ticket.status_code != 200:
-                    pass
+        return r.text
 
-                newdata[field] = "%s%s" % (ticket.json()[field], data[2:])
-            else:
-                newdata[field] = data
-
-            # Bleh
-            url = "%s/api/alert/%s" % (url, cur_id)
-            if field == "status":
-                if data == "New" or data == "Updated":
-                    url = "%s/markAsUnread" % url
-                elif data == "Ignored":
-                    url = "%s/markAsRead" % url
-
-                ret = requests.post(
-                    url,
-                    headers={
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer %s" % apikey,
-                    },
-                )
-            else:
-                ret = requests.patch(
-                    url,
-                    headers={
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer %s" % apikey,
-                    },
-                    json=newdata,
-                )
-
-            return str(ret.status_code)
-        else:
-            return (
-                "%s is not implemented. See https://github.com/frikky/walkoff-integrations for more info."
-                % field_type
-            )
-
-    # https://github.com/TheHive-Project/TheHiveDocs/tree/master/api/connectors/cortex
     async def run_analyzer(self, apikey, url, cortex_id, analyzer_id, artifact_id):
         self.thehive = TheHiveApi(url, apikey)
         return self.thehive.run_analyzer(cortex_id, artifact_id, analyzer_id).text
